@@ -33,6 +33,7 @@ import { onClickOutside } from '@vueuse/core';
 const items = [
     { val: 'ar', title: 'AR' },
     { val: 'en', title: 'EN' },
+    { val: 'zh', title: 'ZH' }, // 👈 就加这一行！！！
 ];
 
 const menuActive = ref(false);
