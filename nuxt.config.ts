@@ -64,15 +64,8 @@ export default defineNuxtConfig({
     preconnect: true
   },
 
-  i18n: {
-    // detectBrowserLanguage: {
-    //   useCookie: true,
-    //   cookieKey: 'locale',
-    //   alwaysRedirect: true,
-    //   fallbackLocale: 'ar'
-    // },
+i18n: {
     detectBrowserLanguage: false,
-    // lazy: true,
     defaultLocale: 'ar',
     strategy: 'no_prefix',
     locales: [
@@ -86,9 +79,15 @@ export default defineNuxtConfig({
         name: 'English',
         file: 'en.json',
       },
+      // 我给你加了中文 👇
+      {
+        code: 'zh',
+        name: '中文',
+        file: 'zh.json',
+      },
     ],
     langDir: 'locales',
-  },
+},
 
   // i18n: {
   //   locales: ['ar', 'en'],
