@@ -6,6 +6,7 @@
     </NuxtLayout>
   </div>
 </template>
+
 <script setup>
 const { t, locale, locales } = useI18n();
 
@@ -24,7 +25,28 @@ useHead({
       type: 'image/ico',
       href: '/img/favicon.ico'
     }
-  ]
+  ],
+  // 👇 加到这里，会自动放在 </body> 前
+  script: [
+    {
+      type: 'text/javascript',
+      body: true, // 关键：放在 body 末尾
+      innerHTML: `
+        window.LOKALISE_CONFIG = {
+          projectId: "18302045592fa799a35d20.15846093",
+          locale: "${locale.value || 'en'}"
+        };
+        (function () {
+          var a = document.createElement("script");
+          a.type = "text/javascript";
+          a.async = true;
+          a.src = "https://app.lokalise.com/live-js/script.min.js?" + new Date().getTime();
+          document.body.appendChild(a);
+        })();
+      `
+    }
+  ],
+  __dangerouslyDisableSanitizers: ['script'] // 允许内联 script
 });
 
 const { $i18n } = useNuxtApp();
@@ -33,30 +55,6 @@ const languageCookie = useCookie('language');
 if (languageCookie.value) {
   $i18n.setLocale(languageCookie.value);
 }
-
-// onMounted(() => {
-//   setHtmlDirection(locale.value);
-// });
-
-// const setHtmlDirection = (localeValue) => {
-//   useHead({
-//     htmlAttrs: {
-//       dir: localeValue === 'ar' ? 'rtl' : 'ltr',
-//       lang: localeValue === 'ar' ? 'ar' : 'en'
-//     }
-//   })
-// }
-
-// watch(locale, (newLocale) => {
-//   setHtmlDirection(newLocale)
-// })
-
-// useHead({
-//   htmlAttrs: {
-//     'dir': 'rtl',
-//     'lang': 'ar',
-//   },
-// });
-
 </script>
+
 <style lang="scss"></style>
